@@ -23,8 +23,10 @@ export class AppComponent implements OnInit {
       this.qrCodeImage = null;
       return;
     }
+    console.log(this.message)
 
     this.qrCodeService.generateQRCode(this.message).subscribe({
+      
       next: (response) => {
         const reader = new FileReader();
         reader.onload = () => {
