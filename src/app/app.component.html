@@ -1,0 +1,48 @@
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+  <div
+    class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center transform transition-all duration-500 ease-in-out hover:scale-105"
+  >
+    <h1 class="text-2xl font-bold text-gray-700 mb-6">QR Code Generator</h1>
+    <div class="relative">
+      <input
+        [(ngModel)]="message"
+        type="text"
+        placeholder="Enter your message"
+        class="w-full px-4 py-2 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
+      />
+      <!-- Close button positioned to the right -->
+      <button
+        *ngIf="message"
+        (click)="clearInput()"
+        class="absolute right-2 clean-icon top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <button
+      (click)="generateQRCode()"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+    >
+      Generate QR Code
+    </button>
+
+    <!-- Icon and QR Code container -->
+    <div class="relative mt-6">
+      <div>
+        <i
+        *ngIf="qrCodeImage"
+        (click)="downloadQRCode()"
+        class="fa-solid fa-arrow-down-long absolute right-4 cursor-pointer bottom-4 text-gray-600 animate-bounce"
+      ></i>
+      </div>
+      <img
+        *ngIf="qrCodeImage"
+        [src]="qrCodeImage"
+        alt="QR Code"
+        class="w-64 h-64 mx-auto shadow-lg rounded-lg"
+      />
+      
+    </div>
+  </div>
+</div>

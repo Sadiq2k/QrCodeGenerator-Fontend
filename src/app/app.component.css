@@ -1,0 +1,28 @@
+@keyframes slideInFromTop {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slideInFromTop 0.6s ease-out forwards; /* Change to slideInFromLeft for side animation */
+  }
+  .clean-icon{
+    padding-bottom: 14px;
+  }
