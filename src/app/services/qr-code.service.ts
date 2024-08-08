@@ -7,7 +7,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 })
 export class QrCodeService {
 
-  private backendUrl = 'https://www.stylesphere.tech/qr-code';  // Include the protocol
+  private backendUrl = 'https://api.stylesphere.tech/qr-code';  // Include the protocol
 
   constructor(private http: HttpClient) {}
 
