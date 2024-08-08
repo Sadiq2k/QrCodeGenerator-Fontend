@@ -1,28 +1,29 @@
-import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+// app.component.ts
+import { Component, OnInit } from '@angular/core';
 import { QrCodeService } from './services/qr-code.service';
-import { response } from 'express';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']  // Note the correct attribute name is styleUrls
 })
-export class AppComponent implements DoCheck {
+export class AppComponent implements OnInit {
   title = 'QrCodeGenerate-frontend';
-
   message: string = '';
   qrCodeImage: string | null = null;
 
   constructor(private qrCodeService: QrCodeService) { }
 
-  ngDoCheck(): void {
+  ngOnInit(): void {
+    // Initialize anything if needed
+  }
+
+  generateQRCode(): void {
     if (this.message.trim() === '') {
       this.qrCodeImage = null;
       return;
     }
-  }
 
-  generateQRCode() {
     this.qrCodeService.generateQRCode(this.message).subscribe({
       next: (response) => {
         const reader = new FileReader();
@@ -30,18 +31,19 @@ export class AppComponent implements DoCheck {
           this.qrCodeImage = reader.result as string;
         };
         reader.readAsDataURL(response);
-      }, error(err) {
+      },
+      error: (err) => {
         console.error('Error generating QR code:', err);
       },
-    })
+    });
   }
 
-  clearInput() {
+  clearInput(): void {
     this.message = '';
     this.qrCodeImage = null;
   }
 
-  downloadQRCode() {
+  downloadQRCode(): void {
     if (this.qrCodeImage) {
       const link = document.createElement('a');
       link.href = this.qrCodeImage;
@@ -49,5 +51,4 @@ export class AppComponent implements DoCheck {
       link.click();
     }
   }
-
 }
